@@ -2,7 +2,7 @@
 #include "lin_setup.h"
 #include "func.h"
 #include "func_keys.h"
-
+#include "showLog.c"
 
 int main(void)
 {
@@ -10,6 +10,7 @@ int main(void)
 
         clear();
         createChatLog();    //get FpLog
+	showLog();
         setName();      //get Name
         ser_addr = serAddr();   //get ser_addr
         bindSocket();   //bind CliFd
@@ -116,7 +117,6 @@ void createChatLog(void)
         printf("(openChatLog) error");
         exit(-1);
     }
-    printf("(createChatLog) success\n");
     fclose(fp);
     FpLog = fp;
 }
