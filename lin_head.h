@@ -13,4 +13,4 @@ the same as server*/
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-
+#include <ctype.h>

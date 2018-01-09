@@ -13,6 +13,9 @@ void clear(void);
 void moveyx(void);
 void removeLine(char package[]);
 void color(const char *c);
+bool bye(void);
+void end(void);
+bool strIsBlank(void);
 
 void color(const char *c)
 {
@@ -75,4 +78,21 @@ void removeLine(char package[])
     if(p)
         *p = '\0';
 }
+bool bye(void)
+{
+    const char * p = MyInput;
+    if(!strncmp(p,"quit",4))
+        return(true);
+    else if(!strncmp(p,"bye",3))
+        return(true);
+    else if(!strncmp(p,"exit",4))
+        return(true);
+    else
+        return(false);
 
+}
+void end(void)
+{
+    close(CliFd);
+    printf("\n----------Done----------\n\n");
+}

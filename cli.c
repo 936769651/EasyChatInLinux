@@ -2,15 +2,15 @@
 #include "lin_setup.h"
 #include "func.h"
 #include "func_keys.h"
-#include "showLog.c"
-
+#include "showLog.h"
+//#include "func_keys_test.h"
 int main(void)
 {
         struct sockaddr_in ser_addr;
 
         clear();
         createChatLog();    //get FpLog
-	showLog();
+	    showLog();
         setName();      //get Name
         ser_addr = serAddr();   //get ser_addr
         bindSocket();   //bind CliFd
@@ -19,7 +19,7 @@ int main(void)
     	fflush(stdin);
         getWelcome();
         startChat();
-        close(CliFd);
+        end();            //include close and printf done
         return 0;
 }
 
@@ -38,10 +38,11 @@ void sendPack(void)
     const int cli_fd = CliFd;
 	while(true)
 	{
+        memset(MyInput,0,SAYBUF);
 		strcpy(package,Name);
         strcat(package,": ");
 		getKeys();
-		if(strncmp(MyInput,"quit",4) == 0)
+		if(bye())    //quit or bye or exit
 		{
 			send(cli_fd,MyInput,strlen(MyInput),0);
 			break;
@@ -53,7 +54,9 @@ void sendPack(void)
 			printf("(sendPack) failure\n");
 			break;
 		}
-        sleep(0.5);
+        memset(MyInput,0,SAYBUF);
+        sleep(INPUTSLEEP);
+        fflush(stdin);
 	}
 
 }
@@ -81,13 +84,11 @@ void recvPack()
 }
 void showPack()
 {
-    char command[COMMAND];
-    memset(command,0,COMMAND);
-    sprintf(command,PRINTFLOG,ROWS,CHATLOG);
+    sprintf(showPackCommand,PRINTFLOG,ROWS,CHATLOG);
     clear();
-    system(command);
+    system(showPackCommand);
     moveyx();           //MOVEY,MOVEX
-    printf("%s: %s",Name,MyInput);
+    printf(GREENLEFT"-->""%s: "NOCOLOR"%s",Name,MyInput);
     fflush(stdout);
 }
 void getWelcome()

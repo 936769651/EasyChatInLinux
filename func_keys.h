@@ -11,21 +11,29 @@ void getKeys()
 {  
     int ch = 0;  
     int i = 0;
-    memset(MyInput,0,SAYBUF);
-    init_keyboard();  
+    init_keyboard();
     while(true)
     {  
         if(kbhit())
         {  
             ch = readch();
-            if('\n' == ch)
+            if('\n' == ch) {
                 break;
+            }else if(!isprint(ch)) {
+                continue;
+            }else if('-' == ch){
+                if(0 == i)
+                    continue;
+                MyInput[--i] = '\0';
+                printf("\b \b");
+                fflush(stdout);
+                continue;
+            }
             printf("%c",ch);
 	        fflush(stdout);
+            MyInput[i+1] = '\0';
 	        MyInput[i++] = ch;
-            MyInput[i] = '\0';
         }
-        sleep(0.1);
     }
     close_keyboard();
 }

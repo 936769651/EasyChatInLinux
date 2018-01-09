@@ -11,16 +11,22 @@ the same as server*/
 #define PACKAGEBUF 200
 #define COMMAND 300
 #define WELCOMEBUF 1024
+#define INPUTSLEEP 0.5
 
 //format
 #define ROWS 40
 #define MOVEY 40
 #define MOVEX 0
+#define ARROW "\033[1;32m-->\033[0m"
 #define PRINTFLOG " tail -n %d \"%s\" "
 #define ECHOFORMAT " echo \"%s\" >> \"%s\" "   //echo "str" >>  log   the str must don't have "
 
-
-#define CHATLOG "chat.log"
+//color
+#define GREENLEFT "\033[1;32m"
+#define REDLEFT "\033[0;31m"
+#define NOCOLOR "\033[0m"
+//chat file
+#define CHATLOG ".chat_log"
 
 struct ConUserInfo{
         char flag;
@@ -33,3 +39,4 @@ char Name[NAMEBUF];
 FILE * FpLog;
 int CliFd;
 char MyInput[SAYBUF] = "\0";
+char showPackCommand[COMMAND];
