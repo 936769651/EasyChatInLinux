@@ -5,7 +5,7 @@ void signal_handler(int sigm);
 int bindSocket(void);
 void InitiaConUserList(void);
 void GetWelcome();
-//bool peopleLimit(void);
+bool peopleOverLimit(void);
 int acceptCli(int ser_fd);
 void thread(void * temp_fd);
         int addUser(int con_fd);
@@ -28,9 +28,14 @@ int main(void)
         ser_fd = bindSocket();
         InitiaConUserList();
         GetWelcome();
-        listen(ser_fd,3);
+        listen(ser_fd,5);
         while(true)
         {
+		if(peopleOverLimit())
+		{
+			sleep(10);
+			continue;
+		}
         	con_fd = acceptCli(ser_fd);
 			pthread_create(&pid,NULL,(void *)thread,(void *)&con_fd);
                
@@ -138,9 +143,9 @@ void publish(int id,const char package[])
         }
 }
 
-bool peopleLimit(void)
+bool peopleOverLimit(void)
 {
-        return (People<(CLIENT_MAX - 2)?true:false);
+        return (People>(CLIENT_MAX - 3)?true:false);
 }
 int bindSocket(void)
 {
@@ -181,7 +186,7 @@ void GetWelcome()
 {
         FILE * fp;
         char ch;
-        fp = fopen("/home/ykm/chat/welcome","r");
+        fp = fopen(WELCOMEFILE,"r");
         if(NULL == fp)
         {
                 perror("(GetWelcome)fopen failure\n");
