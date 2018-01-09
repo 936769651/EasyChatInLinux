@@ -17,9 +17,9 @@ void getKeys()
         if(kbhit())
         {  
             ch = readch();
-            if('\n' == ch) {
+            if( ('\n' == ch) || (i >= (SAYBUF - 1))  ) {
                 break;
-            }else if(!isprint(ch)) {
+            }else if(!isprint(ch)) {    //include control char
                 continue;
             }else if('-' == ch){
                 if(0 == i)
