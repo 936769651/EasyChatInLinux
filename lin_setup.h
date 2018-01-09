@@ -1,11 +1,10 @@
 /*lin_setup.h
 the same as server*/
-//ip
+//server
 #define SERVER_IP "111.231.102.16"
 #define SERVER_PORT "8888"
-
 //buf
-#define CLIENT_MAX 20
+#define CLIENT_MAX 50
 #define NAMEBUF 10
 #define SAYBUF 150
 #define PACKAGEBUF 200
@@ -27,6 +26,7 @@ the same as server*/
 #define NOCOLOR "\033[0m"
 //chat file
 #define CHATLOG ".chat_log"
+#define WELCOMEFILE "/root/selfstart/welcome"
 
 struct ConUserInfo{
         char flag;
