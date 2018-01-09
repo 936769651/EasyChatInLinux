@@ -17,6 +17,7 @@ printf(BLANKBLOCK"Update :2018.1.9\n");
 printf(BLANKBLOCK"Author :ykm\n");
 printf(BLANKBLOCK"Contact:936769651@qq.com\n");
 printf("\n\n\n\n\n\n\n");
+printf(GREENLEFT"Attention: Please use English chat,because Chinese can't be dispalyed\n"NOCOLOR);
 printf(GREENLEFT"Attention: In chatting,'-' is 'backspace',please use '-'\n"NOCOLOR);
 
 
