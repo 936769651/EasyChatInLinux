@@ -1,5 +1,6 @@
 #include "lin_head.h"
 #include "lin_setup.h"
+#include "lin_setup_ser.h"
 #include <signal.h>
 void signal_handler(int sigm);
 int bindSocket(void);
